@@ -16,6 +16,7 @@ header {
 
 img {
   width: 3.5rem;
+  height: 3.65rem;
   object-fit: contain;
 }
 
@@ -38,6 +39,8 @@ p {
 
   img {
     width: 4.5rem;
+    height: 4.7rem;
+    object-fit: contain;
   }
 
   h1 {
