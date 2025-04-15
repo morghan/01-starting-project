@@ -1,0 +1,18 @@
+<section id="tasks">
+  <header>
+    <h2>{{ username }}'s Tasks</h2>
+    <menu>
+      <button>Add Task</button>
+    </menu>
+  </header>
+
+  <ul>
+    @for (task of selectedUserTasks; track task.id) {
+    <li>
+      <app-task [userTask]="task" />
+    </li>
+    }@empty {
+    <li>No tasks found.</li>
+    }
+  </ul>
+</section>

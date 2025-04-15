@@ -1,13 +1,6 @@
-import { Component } from '@angular/core';
-import { DUMMY_USERS } from '../dummy-users';
+import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 
-// type User = {
-//   id: string;
-//   name: string;
-//   avatar: string;
-// };
-
-const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+import { type User } from './user.model';
 
 @Component({
   selector: 'app-user',
@@ -17,9 +10,21 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  selectedUser = DUMMY_USERS[randomIndex];
+  @Input({ required: true }) user!: User;
+
+  // This input signal is read-only, which means we can't change its value from within the class
+  // using a set() method like with regular signal properties
+  // name = input.required<string>();
+
+  @Output() select = new EventEmitter<string>();
 
   get imagePath() {
-    return 'assets/users/' + this.selectedUser.avatar;
+    return 'assets/users/' + this.user.avatar;
+  }
+
+  // imagePath = computed(() => 'assets/users/' + this.selectedUser().avatar);
+
+  selectUser() {
+    this.select.emit(this.user.id);
   }
 }
