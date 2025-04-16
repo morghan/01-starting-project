@@ -1,16 +1,18 @@
 import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 
 import { type User } from './user.model';
+import { CardComponent } from '../shared/card/card.component';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
 export class UserComponent {
   @Input({ required: true }) user!: User;
+  @Input({ required: true }) selected!: boolean;
 
   // This input signal is read-only, which means we can't change its value from within the class
   // using a set() method like with regular signal properties
@@ -24,7 +26,7 @@ export class UserComponent {
 
   // imagePath = computed(() => 'assets/users/' + this.selectedUser().avatar);
 
-  selectUser() {
+  onSelectUser() {
     this.select.emit(this.user.id);
   }
 }
